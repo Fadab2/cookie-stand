@@ -1,0 +1,41 @@
+body {
+    background-color: lightsalmon; 
+    background: url(https://i.etsystatic.com/19967013/r/il/e3a24b/2263693380/il_1140xN.2263693380_aeso.jpg) left bottom repeat; 
+   
+}
+
+div {
+   
+}
+ul {
+    display: flex;
+ 
+}
+
+.nav ul{
+    background-color:orangered;
+    list-style-type: none;
+    color: whitesmoke;
+    font-family:"Trirong", serif;
+    padding: 10px;
+    font-size: 25px;  
+}
+
+a {
+    text-decoration: none;
+    padding: 5px;
+    color: whitesmoke;
+}
+
+  h1 {
+    
+     text-align: center;
+     color: black;
+     font-size: 60px;
+     font-family: "Sofia", sans-serif;
+ }
+#logo {
+    margin-right: 30px;
+
+    
+}
