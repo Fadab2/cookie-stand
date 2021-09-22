@@ -3,7 +3,7 @@ let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', 
 let tableBody = document.getElementById('tbody');
 let tableHeader = document.getElementById('tableHeader');
 let tableFooter = document.getElementById('tableFooter');
-
+let allStores = [];
 function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
     this.storeName = storeName;
     this.minCustPerHr = minCustPerHr;
@@ -11,6 +11,7 @@ function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
     this.avgCookiePerCus = avgCookiePerCus;
     this.results = [];
     this.totalCookies = 0;
+    allStores.push(this);
 }
 
 // generate random num of customers each hr
@@ -24,10 +25,9 @@ StoreLocation.prototype.cookiesPerHr = function () {
     for (let i = 0; i < storeHours.length; i++) {
         this.results.push(Math.ceil(this.avgCookiePerCus * this.numOfCusPerHr()));
         this.totalCookies = this.results[i] + this.totalCookies;
-        //console.log(this.results[i]);
-        //console.log("prototype fun cookiesPerHr " + this.totalCookies);
     }
 }
+
 // output data into document 
 StoreLocation.prototype.salesOutPut = function () {
     this.cookiesPerHr();
@@ -68,23 +68,23 @@ function headerFunction() {
 }
 headerFunction();
 
-//display hourly totals for all stores
+//display hourly totals for all stores.
+// I need to finish this part
 function footerFunction() {
     let rowEl = document.createElement('tr');
     let colEl = document.createElement('th');
     rowEl.appendChild(colEl);
-    let test = this.results;
-    console.log(test);
-    for (let hour = 0; hour < storeHours.length; hour++) {
-        
-        console.log(typeof(this.results));
-        
-        for (let salesPerHr = 0; salesPerHr < test; salesPerHr++) {
-            let dailySales = this.results[salesPerHr] + this.totalCookies;
-            console.log("daily sales: " + dailySales)
+
+    for (let j = 0; j < allStores.length; j++) {
+
+        console.log("inner loop " + allStores[j]);
+
+        for (let i = 0; i < allStores[j].storeHours; i++) {
+            console.log("inner loop " + allStores[i]);
         }
-    } 
-    };
+        console.log("inner loop " + allStores[j]);
+    }
+};
 
 footerFunction();
 
@@ -95,10 +95,10 @@ let dubai = new StoreLocation('dubai', 11, 38, 3.7);
 let paris = new StoreLocation('Paris', 20, 38, 2.3);
 let lima = new StoreLocation('Lima', 2, 16, 4.6);
 
-console.log(seattle.results);
-
 seattle.salesOutPut();
 tokyo.salesOutPut();
 dubai.salesOutPut();
 paris.salesOutPut();
 lima.salesOutPut();
+
+//console.log("All stores " + allStores[1].storeName);
