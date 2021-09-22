@@ -1,7 +1,7 @@
 
 let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'];
 let tableBody = document.getElementById('tbody');
-let tableHead = document.getElementById('tableHeader');
+let tableHeader = document.getElementById('tableHeader');
 let tableFooter = document.getElementById('tableFooter');
 
 function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
@@ -24,7 +24,8 @@ StoreLocation.prototype.cookiesPerHr = function () {
     for (let i = 0; i < storeHours.length; i++) {
         this.results.push(Math.ceil(this.avgCookiePerCus * this.numOfCusPerHr()));
         this.totalCookies = this.results[i] + this.totalCookies;
-        //console.log("prototype fun cookiesPerHr" + this.totalCookies);
+        //console.log(this.results[i]);
+        //console.log("prototype fun cookiesPerHr " + this.totalCookies);
     }
 }
 // output data into document 
@@ -41,13 +42,14 @@ StoreLocation.prototype.salesOutPut = function () {
         rowEl.appendChild(hourlyEl);
     }
 
-    // calculate the total sales each day
+    // add totalsales to document
     let totalSales = document.createElement('td');
     totalSales.innerText = this.totalCookies;
     rowEl.appendChild(totalSales);
     tableBody.appendChild(rowEl);
 };
 
+// display time of the day header
 function headerFunction() {
     let rowEl = document.createElement('tr');
     let colEl = document.createElement('th');
@@ -62,17 +64,38 @@ function headerFunction() {
     let dailyTotals = document.createElement('th');
     dailyTotals.innerText = 'Daily Location Totals';
     rowEl.appendChild(dailyTotals);
-    tableHead.appendChild(rowEl);
+    tableHeader.appendChild(rowEl);
 }
 headerFunction();
 
-// create new instances for the locations
-let seattle = new StoreLocation('seattle', 23, 65, 6.5);
-let tokyo = new StoreLocation('tokyo', 3, 24, 1.2);
-let dubai = new StoreLocation('dubai', 11, 38, 3.7);
-let paris = new StoreLocation('paris', 20, 38, 2.3);
-let lima = new StoreLocation('lima', 2, 16, 4.6);
+//display hourly totals for all stores
+function footerFunction() {
+    let rowEl = document.createElement('tr');
+    let colEl = document.createElement('th');
+    rowEl.appendChild(colEl);
+    let test = this.results;
+    console.log(test);
+    for (let hour = 0; hour < storeHours.length; hour++) {
+        
+        console.log(typeof(this.results));
+        
+        for (let salesPerHr = 0; salesPerHr < test; salesPerHr++) {
+            let dailySales = this.results[salesPerHr] + this.totalCookies;
+            console.log("daily sales: " + dailySales)
+        }
+    } 
+    };
 
+footerFunction();
+
+// create new instances for the locations
+let seattle = new StoreLocation('Seattle', 23, 65, 6.5);
+let tokyo = new StoreLocation('Tokyo', 3, 24, 1.2);
+let dubai = new StoreLocation('dubai', 11, 38, 3.7);
+let paris = new StoreLocation('Paris', 20, 38, 2.3);
+let lima = new StoreLocation('Lima', 2, 16, 4.6);
+
+console.log(seattle.results);
 
 seattle.salesOutPut();
 tokyo.salesOutPut();

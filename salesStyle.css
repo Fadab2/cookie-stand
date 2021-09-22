@@ -1,0 +1,11 @@
+table, th, td {
+    border: 1px solid black;
+  }
+
+  #store-location {
+      background-color:lightyellow;
+      font-size: large;
+  }
+  th {
+      background-color:limegreen;
+  }
