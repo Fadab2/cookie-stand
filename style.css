@@ -1,6 +1,6 @@
 body {
     background-color: lightsalmon; 
-    background: url(https://i.etsystatic.com/19967013/r/il/e3a24b/2263693380/il_1140xN.2263693380_aeso.jpg) left bottom repeat; 
+   background-repeat: repeat;
    
 }
 
@@ -9,7 +9,10 @@ div {
 }
 ul {
     display: flex;
- 
+}
+
+li {
+    padding: 20px;
 }
 
 .nav ul{
@@ -18,7 +21,8 @@ ul {
     color: whitesmoke;
     font-family:"Trirong", serif;
     padding: 10px;
-    font-size: 25px;  
+    font-size: 25px;    
+
 }
 
 a {
@@ -37,5 +41,14 @@ a {
 #logo {
     margin-right: 30px;
 
-    
+}
+.family {
+    display: flex;
+    margin: 30px;
+    width: 100%;
+}
+#fam-image, #shirt-image, p {
+    display:inline-block;
+    width: 400px;
+    padding: 20px;
 }
