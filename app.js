@@ -3,7 +3,7 @@ let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', 
 let tableBody = document.getElementById('tbody');
 let tableHeader = document.getElementById('tableHeader');
 let tableFooter = document.getElementById('tableFooter');
-let allStores = [];
+
 function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
     this.storeName = storeName;
     this.minCustPerHr = minCustPerHr;
@@ -11,12 +11,12 @@ function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
     this.avgCookiePerCus = avgCookiePerCus;
     this.results = [];
     this.totalCookies = 0;
-    allStores.push(this);
+    StoreLocation.allStores.push(this);
 }
 
 // generate random num of customers each hr
 StoreLocation.prototype.numOfCusPerHr = function () {
-    let custPerHr = Math.floor(Math.random() * (this.maxCustPerHr - this.minCustPerHr + 1) + this.minCustPerHr);
+    let custPerHr = Math.ceil(Math.random() * (this.maxCustPerHr - this.minCustPerHr + 1) + this.minCustPerHr);
     //console.log(custPerHr);
     return custPerHr;
 }
@@ -49,6 +49,21 @@ StoreLocation.prototype.salesOutPut = function () {
     tableBody.appendChild(rowEl);
 };
 
+StoreLocation.allStores = [];
+let seattle = new StoreLocation('Seattle', 23, 65, 6.5);
+let tokyo = new StoreLocation('Tokyo', 3, 24, 1.2);
+let dubai = new StoreLocation('dubai', 11, 38, 3.7);
+let paris = new StoreLocation('Paris', 20, 38, 2.3);
+let lima = new StoreLocation('Lima', 2, 16, 4.6);
+
+seattle.salesOutPut();
+tokyo.salesOutPut();
+dubai.salesOutPut();
+paris.salesOutPut();
+lima.salesOutPut();
+
+//console.log(StoreLocation.allStores);
+
 // display time of the day header
 function headerFunction() {
     let rowEl = document.createElement('tr');
@@ -73,32 +88,60 @@ headerFunction();
 function footerFunction() {
     let rowEl = document.createElement('tr');
     let colEl = document.createElement('th');
+    colEl.textContent = 'Hourly Totals for all Locations';
     rowEl.appendChild(colEl);
+    let hourlyTotal = 0;
+    let totalOfTotals = 0;
+    for (let j = 0; j < storeHours.length; j++) {
+        hourlyTotal = 0;
+        //console.log("inner loop " + allStores[j]);
+        console.log(StoreLocation.allStores)
+        
+        for (let i = 0; i < StoreLocation.allStores.length; i++) {
+            console.log(StoreLocation.allStores[i]);
+            hourlyTotal = hourlyTotal + StoreLocation.allStores[i].results[j];
+            totalOfTotals = totalOfTotals + StoreLocation.allStores[i].results[j];
 
-    for (let j = 0; j < allStores.length; j++) {
 
-        console.log("inner loop " + allStores[j]);
-
-        for (let i = 0; i < allStores[j].storeHours; i++) {
-            console.log("inner loop " + allStores[i]);
+            //console.log("inner loop " + allStores[i]);
         }
-        console.log("inner loop " + allStores[j]);
+        colEl = document.createElement('th');
+        colEl.textContent = hourlyTotal;
+        rowEl.appendChild(colEl);
+        //console.log("inner loop " + allStores[j]);
     }
+    colEl = document.createElement('th');
+    colEl.textContent = totalOfTotals;
+    rowEl.appendChild(colEl);
+    tableBody.appendChild(rowEl);
 };
 
 footerFunction();
 
 // create new instances for the locations
-let seattle = new StoreLocation('Seattle', 23, 65, 6.5);
-let tokyo = new StoreLocation('Tokyo', 3, 24, 1.2);
-let dubai = new StoreLocation('dubai', 11, 38, 3.7);
-let paris = new StoreLocation('Paris', 20, 38, 2.3);
-let lima = new StoreLocation('Lima', 2, 16, 4.6);
 
-seattle.salesOutPut();
-tokyo.salesOutPut();
-dubai.salesOutPut();
-paris.salesOutPut();
-lima.salesOutPut();
 
-//console.log("All stores " + allStores[1].storeName);
+
+
+
+/******************************************************************** */
+// create stores using form and event listener
+
+let storeFormEl = document.getElementById('create-store');
+// let buttonEl = document.getElementById('login-btn');
+
+
+function handleStore(formSubmission) {
+    formSubmission.preventDefault();
+
+    let storeName = formSubmission.target.storeName.value;
+    let minCustPerHr = formSubmission.target.minCustPerHr.value;
+    let maxCustPerHr = formSubmission.target.maxCustPerHr.value;
+    let avgCookiePerCus = formSubmission.target.avgCookiePerCus.value;
+    // run a loop to check for specific stre allStores[i].stoerName == storeName. if a store exist  
+    let newStore = new StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus);
+    newStore.salesOutPut();
+    console.log(newStore);
+}
+
+storeFormEl.addEventListener('submit', handleStore);

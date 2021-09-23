@@ -19,6 +19,20 @@
         </table>
 
     </div>
+    <form id="create-store">
+        <fieldset>
+            <legend>Create Location</legend>
+            <label>Location Name</label>
+            <input name="storeName" type="text" required>
+            <label>Min Customer</label>
+            <input name="minCustPerHr" type="number" required>
+            <label>Max Customer</label>
+            <input name="maxCustPerHr" type="number" required>
+            <label>Average Cookies</label>
+            <input name="avgCookiePerCus" type="number" step="0.01" required>
+            <button>Create!</button>
+        </fieldset>
+    </form>
     <script src="app.js"></script>
 </body>
 
