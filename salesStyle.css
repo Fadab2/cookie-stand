@@ -3,26 +3,24 @@ body {
     position: absolute;
     text-align: center;
     margin-left: 100px;
-    background-color: lightsalmon;
-  
+    background-color: lightsalmon; 
 }
 
-#table {
-    
-}
 table, th, td{
     border: 2px solid black;
-
   }
 
   #store-location{
       background-color:lightyellow;
-      font-size: large;
-     
+      font-size: large;   
   }
-  th {
+  #tableHeader {
       position: relative;
-      background-color:limegreen;
+      background-color: green;
+  }
+
+  #tableFooter {
+      background-color: orangered;
   }
 
   #form {
@@ -39,22 +37,25 @@ table, th, td{
   }
   button, input, select, textarea {
     font-size: 100%;
-    border-radius: 5px;
-    
+    border-radius: 5px; 
   }
+
   label {
       display: block;
       margin-top: 10px;
   }
+
   input {
       padding: .5em;
       border: solid 1px orangered;
   }
+
   #h1 {
       text-align: center;
       background-color: orangered;
       padding: 30px;
   }
+
   button {
       background-color: orangered;
       border-radius: 5px;
@@ -70,6 +71,7 @@ table, th, td{
     background-color: lightyellow;
     font-size: 20px;
 }
+
 #home1, #home2 {
     font-size: 20px;
     color: darkslateblue;

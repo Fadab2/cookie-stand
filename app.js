@@ -4,12 +4,13 @@ let tableBody = document.getElementById('tbody');
 let tableHeader = document.getElementById('tableHeader');
 let tableFooter = document.getElementById('tableFooter');
 
+// constructor
 function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
     this.storeName = storeName;
     this.minCustPerHr = minCustPerHr;
     this.maxCustPerHr = maxCustPerHr;
     this.avgCookiePerCus = avgCookiePerCus;
-    this.results = [];
+    this.storeSales = [];
     this.totalCookies = 0;
     StoreLocation.allStores.push(this);
 }
@@ -17,14 +18,14 @@ function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
 // generate random num of customers each hr
 StoreLocation.prototype.numOfCusPerHr = function () {
     let custPerHr = Math.floor(Math.random() * (this.maxCustPerHr - this.minCustPerHr + 1) + this.minCustPerHr);
-    console.log(custPerHr);
+    //console.log(custPerHr);
     return custPerHr;
 }
 // fucntion to calculate the sales per hr
 StoreLocation.prototype.cookiesPerHr = function () {
     for (let i = 0; i < storeHours.length; i++) {
-        this.results.push(Math.ceil(this.avgCookiePerCus * this.numOfCusPerHr()));
-        this.totalCookies = this.results[i] + this.totalCookies;
+        this.storeSales.push(Math.ceil(this.avgCookiePerCus * this.numOfCusPerHr()));
+        this.totalCookies = this.storeSales[i] + this.totalCookies;
     }
 }
 
@@ -36,9 +37,9 @@ StoreLocation.prototype.salesOutPut = function () {
 
     colEl.innerText = this.storeName;
     rowEl.appendChild(colEl);
-    for (let i = 0; i < this.results.length; i++) {
+    for (let i = 0; i < this.storeSales.length; i++) {
         let hourlyEl = document.createElement('td');
-        hourlyEl.innerText = this.results[i];
+        hourlyEl.innerText = this.storeSales[i];
         rowEl.appendChild(hourlyEl);
     }
 
@@ -47,7 +48,7 @@ StoreLocation.prototype.salesOutPut = function () {
     rowEl.appendChild(totalSales);
     tableBody.appendChild(rowEl);
 };
-console.log(StoreLocation.results);
+//console.log(StoreLocation.storeSales);
 
 // create new instances for the locations
 StoreLocation.allStores = [];
@@ -95,8 +96,8 @@ function footerFunction() {
         // console.log(StoreLocation.allStores)
 
         for (let i = 0; i < StoreLocation.allStores.length; i++) {
-            hourlyTotal = hourlyTotal + StoreLocation.allStores[i].results[j];
-            totalOfTotals = totalOfTotals + StoreLocation.allStores[i].results[j];
+            hourlyTotal = hourlyTotal + StoreLocation.allStores[i].storeSales[j];
+            totalOfTotals = totalOfTotals + StoreLocation.allStores[i].storeSales[j];
 
         }
         colEl = document.createElement('th');
