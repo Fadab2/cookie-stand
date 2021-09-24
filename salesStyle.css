@@ -70,8 +70,13 @@ table, th, td{
     background-color: lightyellow;
     font-size: 20px;
 }
-#home {
+#home1, #home2 {
     font-size: 20px;
+    color: darkslateblue;
     text-decoration: none;
- 
+}
+
+ #home2 {
+    text-align: center;
+    text-decoration: none;
 }

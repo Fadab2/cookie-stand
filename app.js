@@ -16,7 +16,8 @@ function StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus) {
 
 // generate random num of customers each hr
 StoreLocation.prototype.numOfCusPerHr = function () {
-    let custPerHr = Math.ceil(Math.random() * (this.maxCustPerHr - this.minCustPerHr + 1) + this.minCustPerHr);
+    let custPerHr = Math.floor(Math.random() * (this.maxCustPerHr - this.minCustPerHr + 1) + this.minCustPerHr);
+    console.log(custPerHr);
     return custPerHr;
 }
 // fucntion to calculate the sales per hr
@@ -46,20 +47,21 @@ StoreLocation.prototype.salesOutPut = function () {
     rowEl.appendChild(totalSales);
     tableBody.appendChild(rowEl);
 };
+console.log(StoreLocation.results);
 
 // create new instances for the locations
 StoreLocation.allStores = [];
-// let seattle = new StoreLocation('Seattle', 23, 65, 6.5);
-// let tokyo = new StoreLocation('Tokyo', 3, 24, 1.2);
-// let dubai = new StoreLocation('dubai', 11, 38, 3.7);
-// let paris = new StoreLocation('Paris', 20, 38, 2.3);
-// let lima = new StoreLocation('Lima', 2, 16, 4.6);
+let seattle = new StoreLocation('Seattle', 23, 65, 6.5);
+let tokyo = new StoreLocation('Tokyo', 3, 24, 1.2);
+let dubai = new StoreLocation('dubai', 11, 38, 3.7);
+let paris = new StoreLocation('Paris', 20, 38, 2.3);
+let lima = new StoreLocation('Lima', 2, 16, 4.6);
 
-// seattle.salesOutPut();
-// tokyo.salesOutPut();
-// dubai.salesOutPut();
-// paris.salesOutPut();
-// lima.salesOutPut();
+seattle.salesOutPut();
+tokyo.salesOutPut();
+dubai.salesOutPut();
+paris.salesOutPut();
+lima.salesOutPut();
 
 // display operation hrs on header
 function headerFunction() {
@@ -81,7 +83,34 @@ function headerFunction() {
 headerFunction();
 
 
+function footerFunction() {
+    let rowEl = document.createElement('tr');
+    let colEl = document.createElement('th');
+    colEl.textContent = 'Hourly Totals for all Locations';
+    rowEl.appendChild(colEl);
+    let hourlyTotal = 0;
+    let totalOfTotals = 0;
+    for (let j = 0; j < storeHours.length; j++) {
+        hourlyTotal = 0;
+        // console.log(StoreLocation.allStores)
 
+        for (let i = 0; i < StoreLocation.allStores.length; i++) {
+            hourlyTotal = hourlyTotal + StoreLocation.allStores[i].results[j];
+            totalOfTotals = totalOfTotals + StoreLocation.allStores[i].results[j];
+
+        }
+        colEl = document.createElement('th');
+        colEl.textContent = hourlyTotal;
+        rowEl.appendChild(colEl);
+        //console.log("inner loop " + allStores[j]);
+    }
+    colEl = document.createElement('th');
+    colEl.textContent = totalOfTotals;
+    rowEl.appendChild(colEl);
+    tableFooter.appendChild(rowEl);
+};
+
+footerFunction();
 
 /******************************************************************** */
 // create stores using form and event listener
@@ -102,34 +131,7 @@ function handleStore(formSubmission) {
     newStore.salesOutPut();
     console.log(newStore);
     //display hourly totals for all stores.
-function footerFunction() {
-    let rowEl = document.createElement('tr');
-    let colEl = document.createElement('th');
-    colEl.textContent = 'Hourly Totals for all Locations';
-    rowEl.appendChild(colEl);
-    let hourlyTotal = 0;
-    let totalOfTotals = 0;
-    for (let j = 0; j < storeHours.length; j++) {
-        hourlyTotal = 0;
-       // console.log(StoreLocation.allStores)
 
-        for (let i = 0; i < StoreLocation.allStores.length; i++) {
-            hourlyTotal = hourlyTotal + StoreLocation.allStores[i].results[j];
-            totalOfTotals = totalOfTotals + StoreLocation.allStores[i].results[j];
-
-        }
-        colEl = document.createElement('th');
-        colEl.textContent = hourlyTotal;
-        rowEl.appendChild(colEl);
-        //console.log("inner loop " + allStores[j]);
-    }
-    colEl = document.createElement('th');
-    colEl.textContent = totalOfTotals;
-    rowEl.appendChild(colEl);
-    tableBody.appendChild(rowEl);
-};
-
-footerFunction();
 }
 
 storeFormEl.addEventListener('submit', handleStore);
