@@ -9,16 +9,34 @@
 </head>
 
 <body>
-
+    <h1 id="h1">Stores Daily Sales</h1>
+    <a id="home1" href="index.html">Back to home page</a>
     <div>
         <table id="store-location">
             <thead id="tableHeader"></thead>
             <tbody id="tbody"></tbody>
-            <tfoot id="tableFoot"></tfoot>
-
+            <tfoot id="tableFooter"></tfoot>
         </table>
 
     </div>
+    <form id="create-store">
+        <fieldset id="form">
+            <legend>Create Location</legend>
+            <label>Location Name</label>
+            <input name="storeName" type="text" placeholder="Location Name" required>
+            <label>Minimum Customers</label>
+            <input name="minCustPerHr" type="number" placeholder="Minimum Customers" required>
+            <label>Maximum Customer</label>
+            <input name="maxCustPerHr" type="number" placeholder="Maximum Customers" required>
+            <label>Average Cookies</label>
+            <input name="avgCookiePerCus" type="number" placeholder="Average Cookies" step="0.01" required>
+            <button>Create!</button>
+        </fieldset>
+    </form>
+    <div>
+        <a id="home2" href="index.html">Back to home page</a>
+    </div>
+
     <script src="app.js"></script>
 </body>
 

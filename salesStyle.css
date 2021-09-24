@@ -1,11 +1,84 @@
-table, th, td {
-    border: 1px solid black;
+
+body {
+    position: absolute;
+    text-align: center;
+    margin-left: 100px;
+    background-color: lightsalmon; 
+}
+
+table, th, td{
+    border: 2px solid black;
   }
 
-  #store-location {
+  #store-location{
       background-color:lightyellow;
-      font-size: large;
+      font-size: large;   
   }
-  th {
-      background-color:limegreen;
+  #tableHeader {
+      position: relative;
+      background-color: green;
   }
+
+  #tableFooter {
+      background-color: orangered;
+  }
+
+  #form {
+      display: inline-block;
+      background-color: lightyellow;
+      margin-top: 50px;
+      padding: 12px 20px;
+      width: 300px;
+      height: 380px;
+      margin-left: 30%;
+      border: 3px solid orangered;
+      box-sizing: border-box;
+     
+  }
+  button, input, select, textarea {
+    font-size: 100%;
+    border-radius: 5px; 
+  }
+
+  label {
+      display: block;
+      margin-top: 10px;
+  }
+
+  input {
+      padding: .5em;
+      border: solid 1px orangered;
+  }
+
+  #h1 {
+      text-align: center;
+      background-color: orangered;
+      padding: 30px;
+  }
+
+  button {
+      background-color: orangered;
+      border-radius: 5px;
+      text-align: center;
+      padding: 15px 32px;
+      font-size: 20px;
+  }
+
+  legend {
+    border-radius: 5px;
+    text-align: center;
+    border: 3px solid orangered;
+    background-color: lightyellow;
+    font-size: 20px;
+}
+
+#home1, #home2 {
+    font-size: 20px;
+    color: darkslateblue;
+    text-decoration: none;
+}
+
+ #home2 {
+    text-align: center;
+    text-decoration: none;
+}
