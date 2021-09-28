@@ -85,6 +85,7 @@ headerFunction();
 
 
 function footerFunction() {
+    tableFooter.innerHTML = '';
     let rowEl = document.createElement('tr');
     let colEl = document.createElement('th');
     colEl.textContent = 'Hourly Totals for all Locations';
@@ -130,7 +131,8 @@ function handleStore(formSubmission) {
     // run a loop to check for specific stre allStores[i].stoerName == storeName. if a store exist  
     let newStore = new StoreLocation(storeName, minCustPerHr, maxCustPerHr, avgCookiePerCus);
     newStore.salesOutPut();
-    console.log(newStore);
+    footerFunction();
+    //console.log(newStore);
     //display hourly totals for all stores.
 
 }
